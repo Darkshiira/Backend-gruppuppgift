@@ -36,11 +36,13 @@ module.exports.DeleteCountry = (req, res) => {
         res.status(500).send(err);
         return;
       } else if (results.length == 0) {
+        res.status(400).send("Fel kod");
         return;
       } else {
               const {Namn} = value;
-        pool.execute('DELETE FROM; Land WHERE amn = ?', [Namn], (err, results) => {
+        pool.execute('DELETE FROM Land WHERE Namn = ?', [Namn], (err, results) => {
             if(err) {
+              res.status(500).send(err);
               return;
              }
 

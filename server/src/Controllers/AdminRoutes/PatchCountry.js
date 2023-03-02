@@ -58,36 +58,45 @@ module.exports.PatchCountry= (req, res) => {
             return;
           } else {
             let msg = "";
-            if (Befolkning) {
+            if (Befolkning && Huvudstad) {
+              pool.execute(
+                "UPDATE Land SET Befolkning=?, Huvudstad=? WHERE Namn=?",
+                [Befolkning, Huvudstad, Namn],
+                (err, results) => {
+                  if (err) {
+                    res.status(500).send(err);
+                  } else {
+                    res.status(200).send("Befolkning och Huvudstad uppdaterad.");
+                  }
+                }
+              );
+            }
+            if (Befolkning && !Huvudstad) {
               pool.execute(
                 "UPDATE Land SET Befolkning=? WHERE Namn=?",
                 [Befolkning, Namn],
                 (err, results) => {
                   if (err) {
-                    msg =
-                      "Befolkning kunde inte uppdateras, var god försök igen. ";
+                    res.status(500).send(err);
                   } else {
-                    msg = "Befolkning uppdaterad. ";
+                    res.status(200).send("Befolkning uppdaterad.");
                   }
                 }
               );
             }
-            if (Huvudstad) {
+            if (Huvudstad && !Befolkning) {
               pool.execute(
                 "UPDATE Land SET Huvudstad=? WHERE Namn=?",
                 [Huvudstad, Namn],
                 (err, results) => {
                   if (err) {
-                    msg =
-                      msg +
-                      "Huvudstad kunde inte uppdateras, var god försök igen.";
+                    res.status(500).send(err);
                   } else {
-                    msg = "Huvudstad uppdaterad.";
+                    res.status(200).send("Huvudstad uppdaterad.")
                   }
                 }
               );
             }
-            res.status(200).send(msg);
           }
         }
       );
