@@ -15,6 +15,7 @@ module.exports.PostCountry = function (req, res) {
         .required(),
       Befolkning: joi.number().integer().min(0).max(2000000000).required(),
       Huvudstad: joi.string().alphanum().min(3).max(50).required(),
+      Sprak: joi.string().alphanum().min(3).max(50).required(),
     });
   
     const { error, value } = schema.validate(req.body);
@@ -31,10 +32,10 @@ module.exports.PostCountry = function (req, res) {
         res.status(401).json("Fel lösenord");
         return;
       } else {
-        const { Namn, Befolkning, Huvudstad } = value;
+        const { Namn, Befolkning, Huvudstad, Sprak } = value;
         pool.execute(
-          "INSERT INTO Land (Namn, Befolkning, Huvudstad) VALUES (?, ?, ?)",
-          [Namn, Befolkning, Huvudstad],
+          "INSERT INTO Land (Namn, Befolkning, Huvudstad, Sprak) VALUES (?, ?, ?, ?)",
+          [Namn, Befolkning, Huvudstad, Sprak],
           (err, results) => {
             if (err) {
               if (err.sqlMessage.includes("Duplicate entry")) {
