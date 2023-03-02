@@ -1,5 +1,6 @@
 const express = require("express");
 const server = express();
+const cors = require("cors");
 /* const mysql = require("mysql2");
 const dotenv = require("dotenv").config(); */
 const { PublicRoute } = require("./Routes/PublicRoute");
@@ -18,6 +19,7 @@ const cors=require('cors');
 //const joi = require("joi");
 server.use(cors());
 server.use(express.json());
+server.use(cors());
 server.use("/api", PublicRoute);
 server.use("/admin", adminRoute)
 
