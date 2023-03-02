@@ -14,6 +14,7 @@ module.exports.PatchCountry= (req, res) => {
       .required(),
     Befolkning: joi.number().integer().allow(null, '').min(0).max(2000000000),
     Huvudstad: joi.string().alphanum().allow(null, '').min(3).max(50),
+    Sprak: joi.string().alphanum().allow(null, '').min(3).max(50),
   });
 
   const { error, value } = schema.validate(req.body);
@@ -31,7 +32,7 @@ module.exports.PatchCountry= (req, res) => {
       res.status(401).json("Fel lösenord");
       return;
     } else {
-      const { Namn, Befolkning, Huvudstad } = value;
+      const { Namn, Befolkning, Huvudstad, Sprak } = value;
       pool.execute(
         "SELECT * FROM Land WHERE Namn=?",
         [Namn],
@@ -46,7 +47,7 @@ module.exports.PatchCountry= (req, res) => {
             return;
           } else {
             let msg = "";
-            if (Befolkning && Huvudstad) {
+            if (Befolkning && Huvudstad && Sprak) {
               pool.execute(
                 "UPDATE Land SET Befolkning=?, Huvudstad=? WHERE Namn=?",
                 [Befolkning, Huvudstad, Namn],
@@ -59,7 +60,61 @@ module.exports.PatchCountry= (req, res) => {
                 }
               );
             }
-            if (Befolkning && !Huvudstad) {
+
+            if (Befolkning && Huvudstad && !Sprak) {
+              pool.execute(
+                "UPDATE Land SET Befolkning=?, Huvudstad=? WHERE Namn=?",
+                [Befolkning, Huvudstad, Namn],
+                (err, results) => {
+                  if (err) {
+                    res.status(500).json(err);
+                  } else {
+                    res.status(200).json("Befolkning och Huvudstad uppdaterad.");
+                  }
+                }
+              );
+            }
+            if (Befolkning && Sprak && !Huvudstad) {
+              pool.execute(
+                "UPDATE Land SET Befolkning=?, Sprak=? WHERE Namn=?",
+                [Befolkning, Sprak, Namn],
+                (err, results) => {
+                  if (err) {
+                    res.status(500).json(err);
+                  } else {
+                    res.status(200).json("Befolkning och Språk uppdaterad.");
+                  }
+                }
+              );
+            }
+            if (Huvudstad && Sprak && !Befolkning) {
+              pool.execute(
+                "UPDATE Land SET Huvudstad=?, Sprak=? WHERE Namn=?",
+                [Huvudstad, Sprak, Namn],
+                (err, results) => {
+                  if (err) {
+                    res.status(500).json(err);
+                  } else {
+                    res.status(200).json("Huvudstad och Språk uppdaterad.");
+                  }
+                }
+              );
+            }
+            if (Sprak && !Befolkning && !Huvudstad) {
+              pool.execute(
+                "UPDATE Land SET Sprak=? WHERE Namn=?",
+                [Sprak, Namn],
+                (err, results) => {
+                  if (err) {
+                    res.status(500).json(err);
+                  } else {
+                    res.status(200).json("Språk uppdaterad.");
+                  }
+                }
+              );
+            }
+
+            if (Befolkning && !Huvudstad && !Sprak) {
               pool.execute(
                 "UPDATE Land SET Befolkning=? WHERE Namn=?",
                 [Befolkning, Namn],
@@ -72,7 +127,7 @@ module.exports.PatchCountry= (req, res) => {
                 }
               );
             }
-            if (Huvudstad && !Befolkning) {
+            if (Huvudstad && !Befolkning && !Sprak) {
               pool.execute(
                 "UPDATE Land SET Huvudstad=? WHERE Namn=?",
                 [Huvudstad, Namn],
