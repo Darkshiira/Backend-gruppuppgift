@@ -16,7 +16,8 @@ const DoThisOnSubmit = async(e) => {
             kod: e.target[0].value,
             Namn: e.target[1].value,
             Huvudstad: e.target[2].value,
-            Befolkning: parseInt(e.target[3].value)
+            Befolkning: parseInt(e.target[3].value),
+            Sprak: e.target[4].value,
         }),
     });
     const data = await res.json();
@@ -52,6 +53,9 @@ addButton.addEventListener("click", (e) => {
     Population.setAttribute("placeholder", "Population");
     Population.setAttribute("type", "number");
     form.appendChild(Population);
+    const Language = document.createElement("input")
+    Language.setAttribute("placeholder", "Language");
+    form.appendChild(Language);
     const Submitbutton = document.createElement("button");
     Submitbutton.innerHTML = "Submit";
     form.appendChild(Submitbutton);
@@ -70,7 +74,8 @@ const UpdateOnSubmit = async(e) => {
             kod: e.target[0].value,
             Namn: e.target[1].value,
             Huvudstad: e.target[2].value,
-            Befolkning: parseInt(e.target[3].value)
+            Befolkning: parseInt(e.target[3].value),
+            Sprak: e.target[4].value,
         }),
     });
     const data = await res.json();
@@ -107,6 +112,9 @@ updateButton.addEventListener("click", (e) => {
      Population.setAttribute("placeholder", "Population");
      Population.setAttribute("type", "number");
      form.appendChild(Population);
+     const Language = document.createElement("input")
+     Language.setAttribute("placeholder", "Language");
+     form.appendChild(Language);
      const Submitbutton = document.createElement("button");
      Submitbutton.innerHTML = "Submit";
      form.appendChild(Submitbutton);
@@ -152,6 +160,9 @@ deleteButton.addEventListener("click", (e) => {
      const Country = document.createElement("input")
      Country.setAttribute("placeholder", "Country");
      form.appendChild(Country);
+     const Language = document.createElement("input")
+     Language.setAttribute("placeholder", "Language");
+     form.appendChild(Language);
      const Submitbutton = document.createElement("button");
      Submitbutton.innerHTML = "Submit";
      form.appendChild(Submitbutton);
