@@ -160,9 +160,6 @@ deleteButton.addEventListener("click", (e) => {
      const Country = document.createElement("input")
      Country.setAttribute("placeholder", "Country");
      form.appendChild(Country);
-     const Language = document.createElement("input")
-     Language.setAttribute("placeholder", "Language");
-     form.appendChild(Language);
      const Submitbutton = document.createElement("button");
      Submitbutton.innerHTML = "Submit";
      form.appendChild(Submitbutton);
