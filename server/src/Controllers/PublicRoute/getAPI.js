@@ -17,7 +17,7 @@ module.exports.getAPI = (req, res) => {
     const {Namn} = value;
     pool.execute('SELECT * FROM Land WHERE Namn = ?', [Namn], (err, results) => {
         if (err) {
-            res.status(500).send("Ditt land finns inte");
+            res.status(500).json(err);
             return;
         }
         else {
