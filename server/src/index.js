@@ -5,7 +5,7 @@ const cors = require("cors");
 const dotenv = require("dotenv").config(); */
 const { PublicRoute } = require("./Routes/PublicRoute");
 const { adminRoute } = require('./Routes/AdminRoute');
-const cors=require('cors');
+
 
 /* const config = {
   host: process.env.DATABASE_HOST,
@@ -17,7 +17,7 @@ const cors=require('cors');
 //const pool = mysql.createPool(config);
 
 //const joi = require("joi");
-server.use(cors());
+
 server.use(express.json());
 server.use(cors());
 server.use("/api", PublicRoute);

@@ -31,16 +31,16 @@ module.exports.PatchCountry= (req, res) => {
   const { error, value } = schema.validate(req.body);
   const { kod } = value;
   if (error) {
-    res.status(400).send(error.details[0].message);
+    res.status(400).json(error.details[0].message);
     return;
   }
 
   pool.execute("SELECT * FROM Admins WHERE kod = ?", [kod], (err, results) => {
     if (err) {
-      res.status(500).send(err);
+      res.status(500).json(err);
       return;
     } else if (results.length == 0) {
-      res.status(401).send("Fel lösenord");
+      res.status(401).json("Fel lösenord");
       return;
     } else {
       const { Namn, Befolkning, Huvudstad } = value;
@@ -49,12 +49,12 @@ module.exports.PatchCountry= (req, res) => {
         [Namn],
         (err, results) => {
           if (err) {
-            res.status(500).send(err);
+            res.status(500).json(err);
             return;
           } else if (results.length == 0) {
             res
               .status(400)
-              .send("Ditt land finns inte, skulle du registrera ett nytt?");
+              .json("Ditt land finns inte, skulle du registrera ett nytt?");
             return;
           } else {
             let msg = "";
@@ -64,9 +64,9 @@ module.exports.PatchCountry= (req, res) => {
                 [Befolkning, Huvudstad, Namn],
                 (err, results) => {
                   if (err) {
-                    res.status(500).send(err);
+                    res.status(500).json(err);
                   } else {
-                    res.status(200).send("Befolkning och Huvudstad uppdaterad.");
+                    res.status(200).json("Befolkning och Huvudstad uppdaterad.");
                   }
                 }
               );
@@ -77,9 +77,9 @@ module.exports.PatchCountry= (req, res) => {
                 [Befolkning, Namn],
                 (err, results) => {
                   if (err) {
-                    res.status(500).send(err);
+                    res.status(500).json(err);
                   } else {
-                    res.status(200).send("Befolkning uppdaterad.");
+                    res.status(200).json("Befolkning uppdaterad.");
                   }
                 }
               );
@@ -90,9 +90,9 @@ module.exports.PatchCountry= (req, res) => {
                 [Huvudstad, Namn],
                 (err, results) => {
                   if (err) {
-                    res.status(500).send(err);
+                    res.status(500).json(err);
                   } else {
-                    res.status(200).send("Huvudstad uppdaterad.")
+                    res.status(200).json("Huvudstad uppdaterad.")
                   }
                 }
               );

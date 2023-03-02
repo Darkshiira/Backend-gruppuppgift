@@ -31,7 +31,7 @@ module.exports.PostCountry = function (req, res) {
   
     const { error, value } = schema.validate(req.body);
     if (error) {
-      res.status(400).send(error.details[0].message);
+      res.status(400).json(error.details[0].message);
       return;
     }
     const { kod } = value;
@@ -40,7 +40,7 @@ module.exports.PostCountry = function (req, res) {
         res.status(500).send(err);
         return;
       } else if (results.length == 0) {
-        res.status(401).send("Fel lösenord");
+        res.status(401).json("Fel lösenord");
         return;
       } else {
         const { Namn, Befolkning, Huvudstad } = value;
@@ -49,10 +49,15 @@ module.exports.PostCountry = function (req, res) {
           [Namn, Befolkning, Huvudstad],
           (err, results) => {
             if (err) {
+              if (err.sqlMessage.includes("Duplicate entry")) {
+                res.status(400).json("Ditt land finns redan");
+                return;
+              } else {
               res.status(500).send(err);
               return;
-            } else {
-              res.status(201).send("Ditt land är registrerat");
+            } 
+          } else {
+              res.status(201).json("Ditt land är registrerat");
             }
           }
         );
