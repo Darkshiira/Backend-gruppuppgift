@@ -1,5 +1,6 @@
 const express = require("express");
 const server = express();
+const cors = require("cors");
 /* const mysql = require("mysql2");
 const dotenv = require("dotenv").config(); */
 const { PublicRoute } = require("./Routes/PublicRoute");
