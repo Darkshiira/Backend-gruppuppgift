@@ -11,18 +11,18 @@ module.exports.getAPI = (req, res) => {
     })
     const { error, value } = schema.validate(req.body);
     if (error) {
-        res.status(400).send(error.details[0].message);
+        res.status(400).json(error.details[0].message);
         return;
     }
     const {Namn} = value;
     pool.execute('SELECT * FROM Land WHERE Namn = ?', [Namn], (err, results) => {
         if (err) {
-            res.status(500).send(err);
+            res.status(500).json(err);
             return;
         }
         else {
             if(results.length> 0) {
-            res.status(200).send(results);
+            res.status(200).json(results);
             }
             
         }
