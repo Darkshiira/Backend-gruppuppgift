@@ -79,6 +79,7 @@ const UpdateOnSubmit = async(e) => {
     else {
         alert(data);
         console.log(data)
+        document.querySelector("form").remove();
     }
 }
 
@@ -130,6 +131,7 @@ const DeleteOnSubmit = async(e) => {
     else {
         alert(data);
         console.log(data)
+        document.querySelector("form").remove();
     }
 }
 
