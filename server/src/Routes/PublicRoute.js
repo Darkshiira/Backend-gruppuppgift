@@ -7,5 +7,4 @@ PublicRoute.get('/', HelloWorld);
 
 PublicRoute.post('/', getAPI);
  
-
 module.exports.PublicRoute  = PublicRoute;

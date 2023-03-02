@@ -1,19 +1,19 @@
 const joi = require('joi');
-const mysql = require('mysql2');
-const dotenv = require('dotenv').config();
+// const mysql = require('mysql2');
+// const dotenv = require('dotenv').config();
 
-const config = {
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
-    }
+// const config = {
+//     host: process.env.DATABASE_HOST,
+//     user: process.env.DATABASE_USER,
+//     password: process.env.DATABASE_PASSWORD,
+//     database: process.env.DATABASE_NAME,
+//     }
 
 
 
-const pool = mysql.createPool(config);
+const { pool }= require('../../modules/db/pool.js');
 
-module.exports.deleteCountry = (req, res) => {
+module.exports.DeleteCountry = (req, res) => {
     const schema = joi.object({
       kod: joi.string().alphanum().min(0).max(6).required(),
       Namn: joi
