@@ -3,13 +3,17 @@ const { DeleteCountry } = require('../Controllers/AdminRoutes/DeleteCountry');
 const { PostCountry } = require('../Controllers/AdminRoutes/PostCountry');
 const { PatchCountry } = require('../Controllers/AdminRoutes/PatchCountry');
 
-const AdminRoute = express.Router();
+const adminRoute = express.Router();
 
-AdminRoute.delete('/', DeleteCountry);
+/* AdminRoute.get("/admin", (req, res) => {
+    res.send("AdminRoute");
+}); */
 
-AdminRoute.post('/', PostCountry);
+adminRoute.delete("/", DeleteCountry);
+
+adminRoute.post("/", PostCountry);
 
 
-AdminRoute.patch('/', PatchCountry)
+adminRoute.patch("/", PatchCountry)
 
-module.exports.AdminRoute  = AdminRoute;
+module.exports.adminRoute  = adminRoute;
