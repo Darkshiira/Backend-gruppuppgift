@@ -11,7 +11,7 @@ module.exports.getAPI = (req, res) => {
     })
     const { error, value } = schema.validate(req.body);
     if (error) {
-        res.status(400).json(error.details[0].message);
+        res.status(400).send(error.details[0].message);
         return;
     }
     const {Namn} = value;
@@ -22,8 +22,9 @@ module.exports.getAPI = (req, res) => {
         }
         else {
             if(results.length> 0) {
-            res.status(200).json(results);
+            res.status(200).send(results);
             }
+            
             
         }
     })
