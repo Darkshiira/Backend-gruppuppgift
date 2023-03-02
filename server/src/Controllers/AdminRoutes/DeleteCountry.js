@@ -43,6 +43,10 @@ module.exports.DeleteCountry = (req, res) => {
             if(err) {
               return;
              }
+
+            else {
+                res.status(200).send("Ditt land är borttaget");
+            }
           })
       }
       })

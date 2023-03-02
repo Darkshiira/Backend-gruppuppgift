@@ -5,11 +5,11 @@ const { PatchCountry } = require('../Controllers/AdminRoutes/PatchCountry');
 
 const AdminRoute = express.Router();
 
-AdminRoute.delete("/admin", DeleteCountry);
+AdminRoute.delete('/', DeleteCountry);
 
-AdminRoute.post("/admin", PostCountry);
+AdminRoute.post('/', PostCountry);
 
 
-AdminRoute.patch("/admin", PatchCountry)
+AdminRoute.patch('/', PatchCountry)
 
 module.exports.AdminRoute  = AdminRoute;
