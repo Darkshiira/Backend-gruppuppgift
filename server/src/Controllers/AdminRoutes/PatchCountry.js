@@ -13,7 +13,7 @@ module.exports.PatchCountry= (req, res) => {
       .max(50)
       .required(),
     Befolkning: joi.number().integer().min(0).max(2000000000),
-    Huvudstad: joi.string().alphanum().min(3).max(50),
+    Huvudstad: joi.string().alphanum().min(3).max(50)
   });
 
   const { error, value } = schema.validate(req.body);
