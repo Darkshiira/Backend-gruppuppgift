@@ -15,7 +15,8 @@ const joi = require('joi');
 
 const { pool }= require('../../modules/db/pool.js');
 
-module.exports.PostCountry = (req, res) => {
+module.exports.PostCountry = function (req, res) {
+  //res.send('PostCountry');
     const schema = joi.object({
       kod: joi.string().alphanum().min(0).max(6).required(),
       Namn: joi
