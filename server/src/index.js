@@ -17,6 +17,7 @@ const { adminRoute } = require('./Routes/AdminRoute');
 
 //const joi = require("joi");
 server.use(express.json());
+server.use(cors());
 server.use("/api", PublicRoute);
 server.use("/admin", adminRoute)
 
