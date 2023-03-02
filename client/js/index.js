@@ -61,15 +61,11 @@ function responseHandler(response) {
         response.forEach(element => {
             let p = document.createElement('p');
             let span = document.createElement('span');
-
             span.innerHTML = ` Namn: ${element.Namn} Befolkning: ${element.Befolkning} Huvudstad: ${element.Huvudstad}`;
-
             p.innerHTML = `Namn: ${element.Namn} Befolkning: ${element.Befolkning} Huvudstad: ${element.Huvudstad}`;
             resultBox.appendChild(p);
-            
         });
     } else{
-        console.log(response);
         let p = document.createElement('p');
         p.innerHTML = response;
         resultBox.appendChild(p);
