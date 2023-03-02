@@ -33,6 +33,8 @@ const DoThisOnSubmit = async(e) => {
    
 
 addButton.addEventListener("click", (e) => {
+    if (document.querySelector("form")) {
+        document.querySelector("form").remove();}
    const form =  document.createElement("form");
     form.addEventListener("submit", DoThisOnSubmit);
     body.appendChild(form);
@@ -86,6 +88,8 @@ const UpdateOnSubmit = async(e) => {
 
 
 updateButton.addEventListener("click", (e) => {
+    if (document.querySelector("form")) {
+        document.querySelector("form").remove();}
     const form =  document.createElement("form");
      form.addEventListener("submit", UpdateOnSubmit);
      body.appendChild(form);
@@ -136,6 +140,8 @@ const DeleteOnSubmit = async(e) => {
 }
 
 deleteButton.addEventListener("click", (e) => {
+    if (document.querySelector("form")) {
+    document.querySelector("form").remove();}
     const form =  document.createElement("form");
      form.addEventListener("submit", DeleteOnSubmit);
      body.appendChild(form);
