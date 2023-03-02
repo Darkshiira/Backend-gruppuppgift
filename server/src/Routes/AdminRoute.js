@@ -5,9 +5,6 @@ const { PatchCountry } = require('../Controllers/AdminRoutes/PatchCountry');
 
 const adminRoute = express.Router();
 
-/* AdminRoute.get("/admin", (req, res) => {
-    res.send("AdminRoute");
-}); */
 
 adminRoute.delete("/", DeleteCountry);
 
