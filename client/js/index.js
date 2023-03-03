@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         let Namn = document.querySelector('#land').value;
-        console.log(Namn);
         if(Namn.length>0){
             
             postAPI(Namn);
@@ -25,7 +24,6 @@ async function postAPI(Namn) {
         Namn: Namn
     }
     body = JSON.stringify(body);
-    console.log(body);
 
     fetch('http://localhost:5050/api/', {
         method: 'POST',

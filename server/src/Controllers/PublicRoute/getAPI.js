@@ -21,6 +21,10 @@ module.exports.getAPI = (req, res) => {
             return;
         }
         else {
+            if (results.length == 0) {
+                res.status(404).json("Ditt land finns inte");
+                return;
+            }
             if(results.length> 0) {
             res.status(200).send(results);
             }

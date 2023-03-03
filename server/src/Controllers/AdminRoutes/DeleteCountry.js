@@ -24,8 +24,8 @@ module.exports.DeleteCountry = (req, res) => {
       if (err) {
         res.status(500).json(err);
         return;
-      } else if (results.length == 0) {
-        res.status(400).json("Fel kod");
+      } if (results.length == 0) {
+        res.status(401).json("Fel kod");
         return;
       } else {
               const {Namn} = value;
@@ -35,7 +35,7 @@ module.exports.DeleteCountry = (req, res) => {
               return;
              }
              if (results.length == 0) {
-                res.status(400).json("Ditt land finns inte");
+                res.status(404).json("Ditt land finns inte");
                 return;
             }
 

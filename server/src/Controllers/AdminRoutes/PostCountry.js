@@ -28,7 +28,7 @@ module.exports.PostCountry = function (req, res) {
       if (err) {
         res.status(500).send(err);
         return;
-      } else if (results.length == 0) {
+      } if (results.length == 0) {
         res.status(401).json("Fel lösenord");
         return;
       } else {
@@ -39,7 +39,7 @@ module.exports.PostCountry = function (req, res) {
           (err, results) => {
             if (err) {
               if (err.sqlMessage.includes("Duplicate entry")) {
-                res.status(400).json("Ditt land finns redan");
+                res.status(409).json("Ditt land finns redan");
                 return;
               } else {
               res.status(500).send(err);
