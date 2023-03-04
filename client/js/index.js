@@ -4,10 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let form = document.querySelector('form');
     form.addEventListener('submit', function (e) {
         e.preventDefault();
-        let Namn = document.querySelector('#land').value;
-        if(Namn.length>0){
+        let namn = document.querySelector('#land').value;
+        if(namn.length>0){
             
-            postAPI(Namn);
+            postAPI(namn);
         }else{
             getAPI();
 
@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-async function postAPI(Namn) {
+async function postAPI(namn) {
    
     let body = {
-        Namn: Namn
+        namn: namn
     }
     body = JSON.stringify(body);
 
