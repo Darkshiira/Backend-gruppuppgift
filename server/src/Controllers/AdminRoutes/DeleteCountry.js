@@ -5,7 +5,7 @@ const { pool }= require('../../modules/db/pool.js');
 module.exports.DeleteCountry = (req, res) => {
     const schema = joi.object({
       kod: joi.string().alphanum().min(0).max(6).required(),
-      Namn: joi
+      namn: joi
         .string()
         .regex(/^[A-Za-z]+$/)
         .min(3)
@@ -27,9 +27,9 @@ module.exports.DeleteCountry = (req, res) => {
       } if (results.length == 0) {
         res.status(401).json("Fel kod");
         return;
-      } else {
-              const {Namn} = value;
-        pool.execute('DELETE FROM Land WHERE Namn = ?', [Namn], (err, results) => {
+      }
+              const {namn} = value;
+        pool.execute('DELETE FROM Land WHERE Namn = ?', [namn], (err, results) => {
             if(err) {
               res.status(500).json(err);
               return;
@@ -38,12 +38,8 @@ module.exports.DeleteCountry = (req, res) => {
                 res.status(404).json("Ditt land finns inte");
                 return;
             }
-
-            else {
                 res.status(200).json("Ditt land är borttaget");
-            }
           })
-      }
       })
     }
   

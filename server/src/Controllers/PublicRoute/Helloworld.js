@@ -1,6 +1,4 @@
-const { pool }= require('../../modules/db/pool.js');
-
-
+const { pool } = require('../../modules/db/pool.js');
 
 module.exports.HelloWorld = (req, res) => {
 
@@ -9,8 +7,6 @@ module.exports.HelloWorld = (req, res) => {
             res.status(500).send(err);
             return;
         }
-        else {
-                        res.status(200).send(results);
-        }
+        res.status(200).send(results);
     })
 }

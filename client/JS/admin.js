@@ -13,10 +13,10 @@ const DoThisOnSubmit = async(e) => {
         },
         body: JSON.stringify({
             kod: e.target[0].value,
-            Namn: e.target[1].value,
-            Huvudstad: e.target[2].value,
-            Befolkning: parseInt(e.target[3].value),
-            Sprak: e.target[4].value,
+            namn: e.target[1].value,
+            huvudstad: e.target[2].value,
+            befolkning: parseInt(e.target[3].value),
+            sprak: e.target[4].value,
         }),
     });
     const data = await res.json();
@@ -73,8 +73,8 @@ const UpdateOnSubmit = async(e) => {
             },
             body: JSON.stringify({
                 kod: e.target[0].value,
-                Namn: e.target[1].value,
-                Huvudstad: e.target[2].value,
+                namn: e.target[1].value,
+                huvudstad: e.target[2].value,
             }),
         });
         const data = await res.json();
@@ -95,8 +95,8 @@ const UpdateOnSubmit = async(e) => {
             },
             body: JSON.stringify({
                 kod: e.target[0].value,
-                Namn: e.target[1].value,
-                Befolkning: parseInt(e.target[2].value),
+                namn: e.target[1].value,
+                befolkning: parseInt(e.target[2].value),
             }),
         });
         const data = await res.json();
@@ -117,8 +117,8 @@ const UpdateOnSubmit = async(e) => {
             },
             body: JSON.stringify({
                 kod: e.target[0].value,
-                Namn: e.target[1].value,
-                Sprak: e.target[2].value,
+                namn: e.target[1].value,
+                sprak: e.target[2].value,
             }),
         });
         const data = await res.json();
@@ -239,7 +239,7 @@ const DeleteOnSubmit = async(e) => {
         },
         body: JSON.stringify({
             kod: e.target[0].value,
-            Namn: e.target[1].value,
+            namn: e.target[1].value,
         }),
     });
     const data = await res.json();

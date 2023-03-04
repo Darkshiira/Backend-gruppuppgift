@@ -1,9 +1,6 @@
 const joi = require('joi');
 
-
-
-const { pool }= require('../../modules/db/pool.js');
-
+const { pool } = require('../../modules/db/pool.js');
 
 module.exports.getAPI = (req, res) => {
     const schema = joi.object({
@@ -14,23 +11,18 @@ module.exports.getAPI = (req, res) => {
         res.status(400).send(error.details[0].message);
         return;
     }
-    const {namn} = value;
-    console.log(namn);
+    const { namn } = value;
     pool.execute('SELECT * FROM Land WHERE Namn = ?', [namn], (err, results) => {
         if (err) {
             res.status(500).json(err);
             return;
         }
-        else {
-            if (results.length == 0) {
-                res.status(404).json("Ditt land finns inte");
-                return;
-            }
-            if(results.length> 0) {
+        if (results.length == 0) {
+            res.status(404).json("Ditt land finns inte");
+            return;
+        }
+        if (results.length > 0) {
             res.status(200).send(results);
-            }
-            
-            
         }
     })
 }

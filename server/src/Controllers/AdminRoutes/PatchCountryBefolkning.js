@@ -6,13 +6,13 @@ const { pool }= require('../../modules/db/pool.js');
 module.exports.PatchCountryBefolkning = (req, res) => {
     const schema = joi.object({
         kod: joi.string().alphanum().min(0).max(6).required(),
-        Namn: joi
+        namn: joi
         .string()
         .regex(/^[A-Za-z]+$/)
         .min(3)
         .max(50)
         .required(),
-        Befolkning: joi
+        befolkning: joi
         .number()
         .integer()
         .min(0)
@@ -35,10 +35,10 @@ module.exports.PatchCountryBefolkning = (req, res) => {
         } if (results.length == 0) {
         res.status(401).json("Fel kod");
         return;
-        } else {
-            const {Namn} = value;
-            const {Befolkning} = value;
-            pool.execute('UPDATE Land SET Befolkning = ? WHERE Namn = ?', [Befolkning, Namn], (err, results) => {
+        }
+            const {namn} = value;
+            const {befolkning} = value;
+            pool.execute('UPDATE Land SET Befolkning = ? WHERE Namn = ?', [befolkning, namn], (err, results) => {
                 if(err) {
                     res.status(500).json(err);
                     return;
@@ -47,11 +47,8 @@ module.exports.PatchCountryBefolkning = (req, res) => {
                     res.status(404).json("Ditt land finns inte");
                     return;
                 }
-                else {
                     res.status(200).json("Ditt land är uppdaterat med nytt Befolkningsantal!");
-                }
             })
-        }
     });
     }
 
